@@ -1,0 +1,68 @@
+fun main() {
+    var score = 0
+
+    println("Welcome to the General Knowledge Quiz!")
+
+    // Question 1
+    println("\nQuestion 1:")
+    println("What is the capital of France?")
+    print("Your Answer: ")
+    val answer1 = readLine()
+    if (answer1?.equals("Paris", ignoreCase = true) == true) {
+        println("Correct!\n")
+        score++
+    } else {
+        println("Wrong! The correct answer is Paris.\n")
+    }
+
+    // Question 2
+    println("Question 2:")
+    println("Which planet is known as the 'Red Planet'?")
+    print("Your Answer: ")
+    val answer2 = readLine()
+    if (answer2?.equals("Mars", ignoreCase = true) == true) {
+        println("Correct!\n")
+        score++
+    } else {
+        println("Wrong! The correct answer is Mars.\n")
+    }
+
+    // Question 3
+    println("Question 3:")
+    println("What is the largest mammal in the world?")
+    print("Your Answer: ")
+    val answer3 = readLine()
+    if (answer3?.equals("Blue Whale", ignoreCase = true) == true) {
+        println("Correct!\n")
+        score++
+    } else {
+        println("Wrong! The correct answer is Blue Whale.\n")
+    }
+
+    // Question 4
+    println("Question 4:")
+    println("Which gas do plants absorb from the atmosphere?")
+    print("Your Answer: ")
+    val answer4 = readLine()
+    if (answer4?.equals("Carbon Dioxide", ignoreCase = true) == true) {
+        println("Correct!\n")
+        score++
+    } else {
+        println("Wrong! The correct answer is Carbon Dioxide.\n")
+    }
+
+    // Question 5
+    println("Question 5:")
+    println("Who wrote the play 'Romeo and Juliet'?")
+    print("Your Answer: ")
+    val answer5 = readLine()
+    if (answer5?.equals("William Shakespeare", ignoreCase = true) == true) {
+        println("Correct!\n")
+        score++
+    } else {
+        println("Wrong! The correct answer is William Shakespeare.\n")
+    }
+
+    // Display the final score
+    println("Quiz Complete! You got $score out of 5 questions correct.")
+}
