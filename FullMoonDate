@@ -1,0 +1,20 @@
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+
+fun calculateNextFullMoon(currentDate: LocalDate): LocalDate {
+    val synodicMonth = 29.53058867
+
+
+    val daysToNextFullMoon = synodicMonth - (currentDate.until(LocalDate.now().plusDays(1), ChronoUnit.DAYS) % synodicMonth)
+
+
+    return currentDate.plusDays(daysToNextFullMoon.toLong())
+}
+
+fun main() {
+    val currentDate = LocalDate.now()
+    val nextFullMoon = calculateNextFullMoon(currentDate)
+
+    println("Current date: $currentDate")
+    println("Next full moon date: $nextFullMoon")
+}
