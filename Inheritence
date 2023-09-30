@@ -1,0 +1,130 @@
+import java.util.Scanner
+
+open class Customer(
+    val customerName: String,
+    val customerPhone: String,
+    val customerAddress: String,
+    val squareFootage: Double
+)
+
+class Commercial(
+    customerName: String,
+    customerPhone: String,
+    customerAddress: String,
+    squareFootage: Double,
+    val name: String,
+    val multiProperty: Boolean
+) : Customer(customerName, customerPhone, customerAddress, squareFootage) {
+    companion object {
+        const val COMMERCIAL_RATE_PER_1000SQFT = 5.0
+    }
+
+    fun calculateWeeklyCharge(): Double {
+        val rate = COMMERCIAL_RATE_PER_1000SQFT * (squareFootage / 1000)
+        return if (multiProperty) rate * 0.9 else rate
+    }
+
+    fun displayQuote() {
+        println("Customer Name: $customerName")
+        println("Customer Phone: $customerPhone")
+        println("Customer Address: $customerAddress")
+        println("Property Name: $name")
+        println("Square Footage: $squareFootage sqft")
+        println("Multi-Property: $multiProperty")
+        println("Weekly Charge: $${calculateWeeklyCharge()}")
+    }
+}
+
+class Residential(
+    customerName: String,
+    customerPhone: String,
+    customerAddress: String,
+    squareFootage: Double,
+    val senior: Boolean
+) : Customer(customerName, customerPhone, customerAddress, squareFootage) {
+    companion object {
+        const val RESIDENTIAL_RATE_PER_1000SQFT = 6.0
+    }
+
+    fun calculateWeeklyCharge(): Double {
+        val rate = RESIDENTIAL_RATE_PER_1000SQFT * (squareFootage / 1000)
+        return if (senior) rate * 0.85 else rate
+    }
+
+    fun displayQuote() {
+        println("Customer Name: $customerName")
+        println("Customer Phone: $customerPhone")
+        println("Customer Address: $customerAddress")
+        println("Square Footage: $squareFootage sqft")
+        println("Senior Discount: $senior")
+        println("Weekly Charge: $${calculateWeeklyCharge()}")
+    }
+}
+
+fun main() {
+    val scanner = Scanner(System.in)
+
+    val customers = mutableListOf<Customer>()
+
+    while (true) {
+        println("Menu:")
+        println("1. Residential Customer")
+        println("2. Commercial Customer")
+        println("3. Done")
+
+        val choice = scanner.nextInt()
+
+        when (choice) {
+            1 -> {
+                println("Enter Customer Name:")
+                val name = scanner.next()
+
+                println("Enter Customer Phone:")
+                val phone = scanner.next()
+
+                println("Enter Customer Address:")
+                val address = scanner.next()
+
+                println("Enter Square Footage:")
+                val squareFootage = scanner.nextDouble()
+
+                println("Is the customer a senior? (true/false):")
+                val isSenior = scanner.nextBoolean()
+
+                val residential = Residential(name, phone, address, squareFootage, isSenior)
+                customers.add(residential)
+                residential.displayQuote()
+            }
+            2 -> {
+                println("Enter Customer Name:")
+                val name = scanner.next()
+
+                println("Enter Customer Phone:")
+                val phone = scanner.next()
+
+                println("Enter Customer Address:")
+                val address = scanner.next()
+
+                println("Enter Square Footage:")
+                val squareFootage = scanner.nextDouble()
+
+                println("Enter Property Name:")
+                val propertyName = scanner.next()
+
+                println("Does the customer have multiple properties? (true/false):")
+                val hasMultiProperty = scanner.nextBoolean()
+
+                val commercial = Commercial(name, phone, address, squareFootage, propertyName, hasMultiProperty)
+                customers.add(commercial)
+                commercial.displayQuote()
+            }
+            3 -> {
+                println("Thank you for using our service!")
+                return
+            }
+            else -> {
+                println("Invalid choice. Please choose a valid option.")
+            }
+        }
+    }
+}
