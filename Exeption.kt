@@ -1,68 +1,9 @@
 import java.util.Scanner
 
-open class Customer(
-    val customerName: String,
-    val customerPhone: String,
-    val customerAddress: String,
-    val squareFootage: Double
-)
 
-class Commercial(
-    customerName: String,
-    customerPhone: String,
-    customerAddress: String,
-    squareFootage: Double,
-    val name: String,
-    val multiProperty: Boolean
-) : Customer(customerName, customerPhone, customerAddress, squareFootage) {
-    companion object {
-        const val COMMERCIAL_RATE_PER_1000SQFT = 5.0
-    }
-
-    fun calculateWeeklyCharge(): Double {
-        val rate = COMMERCIAL_RATE_PER_1000SQFT * (squareFootage / 1000)
-        return if (multiProperty) rate * 0.9 else rate
-    }
-
-    fun displayQuote() {
-        println("Customer Name: $customerName")
-        println("Customer Phone: $customerPhone")
-        println("Customer Address: $customerAddress")
-        println("Property Name: $name")
-        println("Square Footage: $squareFootage sqft")
-        println("Multi-Property: $multiProperty")
-        println("Weekly Charge: $${calculateWeeklyCharge()}")
-    }
-}
-
-class Residential(
-    customerName: String,
-    customerPhone: String,
-    customerAddress: String,
-    squareFootage: Double,
-    val senior: Boolean
-) : Customer(customerName, customerPhone, customerAddress, squareFootage) {
-    companion object {
-        const val RESIDENTIAL_RATE_PER_1000SQFT = 6.0
-    }
-
-    fun calculateWeeklyCharge(): Double {
-        val rate = RESIDENTIAL_RATE_PER_1000SQFT * (squareFootage / 1000)
-        return if (senior) rate * 0.85 else rate
-    }
-
-    fun displayQuote() {
-        println("Customer Name: $customerName")
-        println("Customer Phone: $customerPhone")
-        println("Customer Address: $customerAddress")
-        println("Square Footage: $squareFootage sqft")
-        println("Senior Discount: $senior")
-        println("Weekly Charge: $${calculateWeeklyCharge()}")
-    }
-}
 
 fun main() {
-    val scanner = Scanner(System.`in`)
+    val scanner = Scanner(System.in)
 
     val customers = mutableListOf<Customer>()
 
